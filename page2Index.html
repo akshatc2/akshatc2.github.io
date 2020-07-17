@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="description" content="">
-        <title>Trend View</title>
+        <title>Comparative View</title>
         <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <!-- jQuery UI CSS -->
@@ -18,9 +18,9 @@
         <nav class="navbar navbar-default">
             <div class="container">
                 <a class="navbar-brand" href="#"><img id="logo" src="img/logo.png"></a></br></br></br>
-				<a style="margin-right: 50px;color:green;font-size:16px"  href="https://sritesh81.github.io/sarangd3prj/index.html">Trend View</a>
-				<a style="margin-right: 50px;color:grey;font-size:14px"  href="https://sritesh81.github.io/sarangd3prj/page2Index.html">Comparative View</a>
-				<a style="margin-right: 50px;color:grey;font-size:14px"  href="https://sritesh81.github.io/sarangd3prj/page3Index.html">Market Share View</a
+				<a style="margin-right: 50px;color:grey;font-size:14px"  href="https://sritesh81.github.io/sarangd3prj/index.html">Trend View</a>
+				<a style="margin-right: 50px;color:green;font-size:16px"  href="https://sritesh81.github.io/sarangd3prj/page2Index.html">Comparative View</a>
+				<a style="margin-right: 50px;color:grey;font-size:14px"  href="https://sritesh81.github.io/sarangd3prj/page3Index.html">Market Share View</a>  		      
             </div>
         </nav>
 
@@ -34,15 +34,6 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <select id="coin-select" class="form-control">
-                        <option selected value="stockA">Stock-A</option>
-                        <option value="stockB">Stock-B</option>
-                        <option value="stockC">Stock-C</option>
-                        <option value="stockD">Stock-D</option>
-                        <option value="stockE">Stock-E</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
                     <select id="var-select" class="form-control">
                         <option selected value="price_usd">Price in dollars</option>
                         <option value="market_cap">Market capitalization</option>
@@ -51,7 +42,11 @@
                 </div>
             </div>
             <div class="row">
-                <div id="chart-area"></div>  
+                <div class="col-md-4" id="chart-area1"></div>
+                <div class="col-md-4" id="chart-area2"></div>  
+                <div class="col-md-4" id="chart-area3"></div>  
+                <div class="col-md-4" id="chart-area4"></div>  
+                <div class="col-md-4" id="chart-area5"></div>  
             </div>
         </div>
 
@@ -61,8 +56,8 @@
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/d3.min.js"></script>
     <!-- Custom JS -->
-    <script src="js/lineChart.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/page2LineChart.js"></script>
+    <script src="js/page2Main.js"></script>
 
     </body>
 </html>
