@@ -2,14 +2,22 @@
 <html>
 <head>
 	<title>akshatc2 vizualization</title>
+
+	<link rel="stylesheet" type="text/css" href="dc.css">
 </head>
 <body>
 <h1> AKSHATC2's GAME DATA VIZUALIZATION</h1>
+
+<div id="salesperyear"></div>
+
 <script src="crossfilter.js"></script>
 <script src="d3.js"></script>
 <script src="dc.js"></script>
 
 <script>
+
+	var saleschart = dc.rowChart('#salesperyear');
+
 	d3.csv("clean_Video_Games_Sales_till_2016.csv", function (err,data) {
 		if (err) throw err;
 
@@ -20,6 +28,12 @@
 		var salesDim = ndx.dimension(function(d) {return d["Global_Sales"]; });
 
 		var salesGroup = salesDim.group();
+
+		saleschart
+			.dimension(salesDim)
+			.group(salesGroup);
+
+		dc.renderAll();
 	});
 
 </script>
