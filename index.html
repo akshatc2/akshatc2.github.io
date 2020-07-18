@@ -15,6 +15,11 @@
 
 		var ndx = crossfilter(data);
 		var all = ndx.groupAll();
+
+		var yearDim = ndx.dimension(function(d) {return d["Year_of_Release"]; });
+		var salesDim = ndx.dimension(function(d) {return d["Global_Sales"]; });
+
+		var salesGroup = salesDim.group():
 	});
 
 </script>
