@@ -8,9 +8,14 @@
 <body>
 <h1> AKSHATC2's GAME DATA VIZUALIZATION</h1>
 
+<div id="sales">
+	<h4>Publisher sales over the years</h4>
+</div>
+
 <div id="totalgames">
 	<h4>Total games per Publisher</h4>
 </div>
+
 <div id="totalratings">
 	<h4>Rating distribution of games</h4>
 </div>
@@ -24,9 +29,15 @@
 	
 	var gamechart = dc.rowChart('#totalgames');
 	var ratingchart = dc.rowChart('#totalratings');
+	var linechart = dc.linechart('#sales');
 
 	d3.csv("clean_Video_Games_Sales_till_2016.csv", function (err,data) {
 		if (err) throw err;
+
+		data.forEach(function(d){
+			console.log(typeof d.Year_of_Release);
+		})
+
 
 		var ndx = crossfilter(data);
 		var all = ndx.groupAll();
