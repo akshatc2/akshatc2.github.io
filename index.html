@@ -35,7 +35,9 @@
 		if (err) throw err;
 
 		data.forEach(function(d){
-			console.log(typeof d.Year_of_Release);
+			var tempDate = new Date(d.Year_of_Release);
+			console.log(typeof tempDate);
+			console.log(tempDate);
 		})
 
 
