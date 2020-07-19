@@ -16,7 +16,8 @@
 <script src="dc.js"></script>
 
 <script>
-
+	
+	
 	var gamechart = dc.rowChart('#totalgames');
 	var ratingchart = dc.rowChart('#totalratings');
 
@@ -35,14 +36,15 @@
 		var pubGroup = pubDim.group();
 		var ratingGroup = ratingDim.group();
 
-		gamechart
+		var gamechart = gamechart
 			.dimension(pubDim)
 			.group(pubGroup)
 			.elasticX(true)
 			.width(800)
 			.height(200)
-			.xAxis().ticks(10)
-			.renderTitleLabel(true);
+			.xAxis().ticks(10);
+
+		
 
 		ratingchart
 			.dimension(ratingDim)
@@ -53,6 +55,18 @@
 			.xAxis().ticks(10);
 
 		dc.renderAll();
+
+		function AddXAxis(chartToUpdate, displayText)
+		{
+    		chartToUpdate.svg()
+                .append("text")
+                .attr("class", "x-axis-label")
+                .attr("text-anchor", "middle")
+                .attr("x", chartToUpdate.width()/2)
+                .attr("y", chartToUpdate.height()-3.5)
+                .text(displayText);
+		}
+		AddXAxis(gamechart, "This is the x-axis!");
 	});
 
 </script>
