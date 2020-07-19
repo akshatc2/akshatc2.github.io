@@ -8,8 +8,12 @@
 <body>
 <h1> AKSHATC2's GAME DATA VIZUALIZATION</h1>
 
-<div id="totalgames"></div>
-<div id="totalratings"></div>
+<div id="totalgames">
+	<h4>Total games per Publisher</h4>
+</div>
+<div id="totalratings">
+	<h4>Rating distribution of games</h4>
+</div>
 
 <script src="crossfilter.js"></script>
 <script src="d3.js"></script>
@@ -44,8 +48,6 @@
 			.height(200)
 			.xAxis().ticks(10);
 
-		
-
 		ratingchart
 			.dimension(ratingDim)
 			.group(ratingGroup)
@@ -56,7 +58,7 @@
 
 		dc.renderAll();
 
-		function AddXAxis(chartToUpdate, displayText)
+		/*function AddXAxis(chartToUpdate, displayText)
 		{
     		chartToUpdate.svg()
                 .append("text")
@@ -66,7 +68,7 @@
                 .attr("y", chartToUpdate.height()-3.5)
                 .text(displayText);
 		}
-		AddXAxis(gc, "This is the x-axis!");
+		AddXAxis(gc, "This is the x-axis!");*/
 	});
 
 </script>
