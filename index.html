@@ -8,7 +8,8 @@
 <body>
 <h1> AKSHATC2's GAME DATA VIZUALIZATION</h1>
 
-<div id="totalsales"></div>
+<div id="totalgames"></div>
+<div id="totalratings"></div>
 
 <script src="crossfilter.js"></script>
 <script src="d3.js"></script>
@@ -16,7 +17,8 @@
 
 <script>
 
-	var pubchart = dc.rowChart('#totalsales');
+	var gamechart = dc.rowChart('#totalgames');
+	var ratingchart = dc.rowChart('#totalratings');
 
 	d3.csv("clean_Video_Games_Sales_till_2016.csv", function (err,data) {
 		if (err) throw err;
@@ -27,13 +29,21 @@
 		var yearDim = ndx.dimension(function(d) {return d["Year_of_Release"]; });
 		var salesDim = ndx.dimension(function(d) {return d["Global_Sales"]; });
 		var pubDim = ndx.dimension(function(d) {return d["Pub_final"]; });
+		var ratingDim = ndx.dimension(function(d) {return d["Rating"]; });
 
 		var salesGroup = salesDim.group();
 		var pubGroup = pubDim.group();
+		var ratingGroup = rating.group();
 
-		pubchart
+		gamechart
 			.dimension(pubDim)
-			.group(pubGroup);
+			.group(pubGroup)
+			.elasticX(true);
+
+		ratingchart
+			.dimension(ratingDim)
+			.group(ratingGroup)
+			.elasticX(true);
 
 		dc.renderAll();
 	});
