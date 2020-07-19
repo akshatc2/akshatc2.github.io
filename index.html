@@ -61,7 +61,9 @@
 			.height(500)
 			.dimension(yearDim)
 			.group(salesGroup)
-			.x(d3.time.scale().domain([mindate,maxdate]));
+			.x(d3.time.scale().domain([mindate,maxdate]))
+			.yAxisLabel("Sales in million")
+			.renderArea(true);
 
 		var gc = gamechart
 			.dimension(pubDim)
