@@ -29,7 +29,7 @@
 	
 	var gamechart = dc.rowChart('#totalgames');
 	var ratingchart = dc.rowChart('#totalratings');
-	var linechart = dc.linechart('#sales');
+	var linechart = dc.lineChart('#sales');
 
 	d3.csv("clean_Video_Games_Sales_till_2016.csv", function (err,data) {
 		if (err) throw err;
