@@ -48,15 +48,15 @@
 		var pubDim = ndx.dimension(function(d) {return d["Pub_final"]; });
 		var ratingDim = ndx.dimension(function(d) {return d["Rating"]; });
 		//Sales by prime dimension
-		var oneDim = ndx.dimension(function(d) {return d["Global_Sales"]; }).filterExact("Other");
+		/*var oneDim = ndx.dimension(function(d) {return d["Global_Sales"]; }).filterExact("Other");
 		var twoDim = ndx.dimension(function(d) {return d["Global_Sales"]; }).filterExact("Electronic Arts");
-
+		*/
 		var salesGroup = yearDim.group().reduceSum(function(d) { return d.Global_Sales});
 		var pubGroup = pubDim.group();
 		var ratingGroup = ratingDim.group();
 		//Prime dimension groups
-		var oneGroup = oneDim.group();
-		var twoGroup = twoDim.group();
+		/*var oneGroup = yearDim.group().;
+		var twoGroup = twoDim.group();*/
 
 		var mindate = new Date("1990");
 		var maxdate = new Date("2016");
@@ -65,11 +65,11 @@
 			.width(1200)
 			.height(500)
 			.dimension(yearDim)
-			.group(oneGroup)
+			.group(salesGroup.top(1))
 			.x(d3.time.scale().domain([mindate,maxdate]))
 			.yAxisLabel("Sales in million")
 			.renderArea(true);
-		saleschart.stack(twoGroup);
+		saleschart.stack(salesGroup.top(2));
 
 		var gc = gamechart
 			.dimension(pubDim)
