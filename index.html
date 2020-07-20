@@ -48,7 +48,7 @@
 		var pubDim = ndx.dimension(function(d) {return d["Pub_final"]; });
 		var ratingDim = ndx.dimension(function(d) {return d["Rating"]; });
 		//Sales by prime dimension
-		var oneDim = ndx.dimension(function(d) {return d["Global_Sales"]; }).filterExact("other");
+		var oneDim = ndx.dimension(function(d) {return d["Global_Sales"]; }).filterExact("Other");
 		var twoDim = ndx.dimension(function(d) {return d["Global_Sales"]; }).filterExact("Electronic Arts");
 
 		var salesGroup = yearDim.group().reduceSum(function(d) { return d.Global_Sales});
