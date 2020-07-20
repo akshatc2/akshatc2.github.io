@@ -56,7 +56,7 @@
 		var pubGroup = pubDim.group();
 		var ratingGroup = ratingDim.group();
 		//Prime dimension groups
-		var yeartotal = pubDim.group().reduce((reduceAddsales, reduceRemovesales, reduceInitialsales).all();
+		var yeartotal = pubDim.group().reduce(reduceAddsales, reduceRemovesales, reduceInitialsales).all();
 			function reduceAddsales(p, v) {
     			p.pubDim = v['Pub_final'];
    				p.sales = +v['Global_Sales'];
