@@ -55,8 +55,8 @@
 		var pubGroup = pubDim.group();
 		var ratingGroup = ratingDim.group();
 		//Prime dimension groups
-		/*var oneGroup = yearDim.group().;
-		var twoGroup = twoDim.group();*/
+		var oneGroup = yearDim.group().top(8)[0];
+		var twoGroup = yearDim.group().top(8)[1];
 
 		var mindate = new Date("1990");
 		var maxdate = new Date("2016");
@@ -65,11 +65,11 @@
 			.width(1200)
 			.height(500)
 			.dimension(yearDim)
-			.group(salesGroup.top(1))
+			.group(oneGroup)
 			.x(d3.time.scale().domain([mindate,maxdate]))
 			.yAxisLabel("Sales in million")
 			.renderArea(true);
-		saleschart.stack(salesGroup.top(2));
+		saleschart.stack(twoGroup);
 
 		var gc = gamechart
 			.dimension(pubDim)
