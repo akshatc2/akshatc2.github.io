@@ -45,55 +45,25 @@
 
 		var yearDim = ndx.dimension(function(d) {return d["Year_of_Release"]; });
 		var salesDim = ndx.dimension(function(d) {return d["Global_Sales"]; });
-		//var pubDim = ndx.dimension(function(d) {return d["Pub_final"]; });
+		var pubDim = ndx.dimension(function(d) {return d["Pub_final"]; });
 		var ratingDim = ndx.dimension(function(d) {return d["Rating"]; });
-		//Sales by prime dimension
-		var pubDim = ndx.dimension(function(d) {return d["Year_of_Release"]; });
-		/*var oneDim = ndx.dimension(function(d) {return d["Global_Sales"]; }).filterExact("Other");
-		var twoDim = ndx.dimension(function(d) {return d["Global_Sales"]; }).filterExact("Electronic Arts");
-		*/
+
 		var salesGroup = yearDim.group().reduceSum(function(d) { return d.Global_Sales});
 		var pubGroup = pubDim.group();
 		var ratingGroup = ratingDim.group();
-		//Prime dimension groups
-		var yeartotal = pubDim.group().reduce(reduceAddsales, reduceRemovesales, reduceInitialsales).all();
-			function reduceAddsales(p, v) {
-    			p.pubDim = v['Pub_final'];
-   				p.sales = +v['Global_Sales'];
-   				return p;
-			}
-			function reduceRemovesales(p, v) {
-    			p.pubDim = v['Pub_final'];
-   				p.sales = -v['Global_Sales'];
-   				return p;
-			}
-			function reduceInitialsales() {
-			    return {
-			        pubDim:0,
-			        sales:0
-			    };
-			}
-		 
-		function sel_stack(i) {
-              return function(d) {
-                  return d.value[i];
-              };
-        }
-		/*var oneGroup = salesGroup.top(8)[0];
-		var twoGroup = salesGroup.top(8)[1];
-		*/
-		var mindate = new Date("1990");
+		//var dateGroup = 
+
+		var mindate = new Date("1985");
 		var maxdate = new Date("2016");
 
 		saleschart
 			.width(1200)
 			.height(500)
 			.dimension(yearDim)
-			.group(yeartotal,"Other", sel_stack('1'))
+			.group(salesGroup)
 			.x(d3.time.scale().domain([mindate,maxdate]))
 			.yAxisLabel("Sales in million")
 			.renderArea(true);
-		//saleschart.stack(twoGroup);
 
 		var gc = gamechart
 			.dimension(pubDim)
