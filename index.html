@@ -83,7 +83,7 @@
 			.label(function (d) {
 				return d.key + ': $' + Math.round(d.value/sumTotal,0) + '%';
 			})
-			.transition(1500);
+			.transitionDuration(1500);
 
 		var gc = gamechart
 			.dimension(pubDim)
