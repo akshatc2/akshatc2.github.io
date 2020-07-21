@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="dc.css">
 	<style>
 		.myDiv {
-		  border: 1px lightblue;
+		  border: 2px outset lightblue;
 		  text-align: center;
 		}
 		</style>
@@ -14,21 +14,22 @@
 <body>
 <h1> AKSHATC2's GAME DATA VIZUALIZATION</h1>
 
+<div id="totalgames" class="myDiv">
+	<h4>Total games per Publisher</h4>
+</div>
+
+<div id="totalratings" class="myDiv">
+	<h4>Rating distribution of games</h4>
+</div>
+
 <div id="sales" class="myDiv">
 	<h4>Publisher sales over the years</h4>
 </div>
 
-<div id="marketshare">
+<div id="marketshare" class="myDiv">
 	<h4>Publisher Market share - Global</h4>
 </div>
 
-<div id="totalgames">
-	<h4>Total games per Publisher</h4>
-</div>
-
-<div id="totalratings">
-	<h4>Rating distribution of games</h4>
-</div>
 
 <script src="crossfilter.js"></script>
 <script src="d3.js"></script>
@@ -97,12 +98,14 @@
 			.elasticX(true)
 			.width(800)
 			.height(200)
+			.transitionDuration(1500)
 			.xAxis().ticks(10);
 
 		ratingchart
 			.dimension(ratingDim)
 			.group(ratingGroup)
 			.elasticX(true)
+			.transitionDuration(1500)
 			.width(800)
 			.height(200)
 			.xAxis().ticks(10);
