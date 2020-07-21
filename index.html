@@ -12,6 +12,10 @@
 	<h4>Publisher sales over the years</h4>
 </div>
 
+<div id="marketshare">
+	<h4>Publisher Market share - Global</h4>
+</div>
+
 <div id="totalgames">
 	<h4>Total games per Publisher</h4>
 </div>
@@ -30,6 +34,7 @@
 	var gamechart = dc.rowChart('#totalgames');
 	var ratingchart = dc.rowChart('#totalratings');
 	var saleschart = dc.lineChart('#sales');
+	var piechart = dc.pieChart('#marketshare');
 
 	d3.csv("clean_Video_Games_Sales_till_2016.csv", function (err,data) {
 		if (err) throw err;
@@ -51,7 +56,7 @@
 		var salesGroup = yearDim.group().reduceSum(function(d) { return d.Global_Sales});
 		var pubGroup = pubDim.group();
 		var ratingGroup = ratingDim.group();
-		//var dateGroup = 
+		var marketGroup = pubDim.group().reduceSum(function(d) { return d.Global_Sales});
 
 		var mindate = new Date("1990");
 		var maxdate = new Date("2016");
@@ -65,6 +70,11 @@
 			.yAxisLabel("Sales in million")
 			.renderDataPoints(true)
 			.renderArea(true);
+
+		piechart
+			.dimension(pubDim)
+			.group(marketGroup)
+			.title(function(d){ return d.key + ': $' + d.value + 'M'; });
 
 		var gc = gamechart
 			.dimension(pubDim)
