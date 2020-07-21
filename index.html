@@ -47,6 +47,7 @@
 
 		var ndx = crossfilter(data);
 		var all = ndx.groupAll();
+		var sumTotal = all.reduceSum(function(d) { return d.Global_Sales; }).value();
 
 		var yearDim = ndx.dimension(function(d) {return d["Year_of_Release"]; });
 		var salesDim = ndx.dimension(function(d) {return d["Global_Sales"]; });
@@ -72,11 +73,17 @@
 			.renderArea(true);
 
 		piechart
-			.width(500)
+			.width(400)
 			.height(300)
+			.innerRadius(50)
 			.dimension(pubDim)
 			.group(marketGroup)
-			.title(function(d){ return d.key + ': $' + Math.round(d.value,0) + 'M'; });
+			.title(function(d){ return d.key + ': $' + Math.round(d.value,0) + 'M'; })
+			.legend(dc.legend().x(500).y(5).itemHeight(15).gap(5))
+			.label(function (d) {
+				return d.key + ': $' + Math.round(d.value/sumTotal,0) + '%';
+			})
+			.transition(1500);
 
 		var gc = gamechart
 			.dimension(pubDim)
