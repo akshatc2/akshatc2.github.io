@@ -72,9 +72,11 @@
 			.renderArea(true);
 
 		piechart
+			.width(500)
+			.height(300)
 			.dimension(pubDim)
 			.group(marketGroup)
-			.title(function(d){ return d.key + ': $' + d.value + 'M'; });
+			.title(function(d){ return d.key + ': $' + Math.round(d.value,0) + 'M'; });
 
 		var gc = gamechart
 			.dimension(pubDim)
