@@ -109,7 +109,7 @@
 		var salesGroup = yearDim.group().reduceSum(function(d) { return d.Global_Sales});
 		var genGroup = genDim.group();
 		var ratingGroup = ratingDim.group();
-		var marketGroup = pubDim.group().reduceSum(function(d) { return d.Global_Sales});
+		var marketGroup = genDim.group().reduceSum(function(d) { return d.Global_Sales});
 
 		var mindate = new Date("1990");
 		var maxdate = new Date("2016");
@@ -128,7 +128,7 @@
 			.width(400)
 			.height(300)
 			.innerRadius(50)
-			.dimension(pubDim)
+			.dimension(genDim)
 			.group(marketGroup)
 			.title(function(d){ return d.key + ': $' + Math.round(d.value,0) + 'M'; })
 			.legend(dc.legend().x(500).y(5).itemHeight(15).gap(5))
