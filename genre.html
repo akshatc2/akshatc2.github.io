@@ -48,8 +48,8 @@
     	<div class="container">
     		<ul>
                 <li><a style="padding: 0px" class="navbar-brand" href="#"><img src="header.png" alt="header" width="659" height="59"></a></li>
-				<li><a class="active" href="https://akshatc2.github.io/index.html">Publisher View</a></li>
-				<li><a href="https://akshatc2.github.io/genre.html">Genre View</a></li>
+				<li><a href="https://akshatc2.github.io/index.html">Publisher View</a></li>
+				<li><a class="active" href="https://akshatc2.github.io/genre.html">Genre View</a></li>
 				<li><a  href="https://akshatc2.github.io/platform.html">Platform View</a></li>
 			</ul>
         </div>
@@ -59,7 +59,7 @@
 <!--<h2> akshatc2's Video Games - Publisher view</h2>-->
 
 <div id="totalgames" class="noBox">
-	<h3>Total games per Publisher</h3>
+	<h3>Total games per Genre</h3>
 </div>
 
 <div id="totalratings" class="noBox">
@@ -100,15 +100,14 @@
 		var ndx = crossfilter(data);
 		var all = ndx.groupAll();
 		var sumTotal = all.reduceSum(function(d) { return d.Global_Sales; }).value();
-		console.log(sumTotal);
 
 		var yearDim = ndx.dimension(function(d) {return d["Year_of_Release"]; });
 		var salesDim = ndx.dimension(function(d) {return d["Global_Sales"]; });
-		var pubDim = ndx.dimension(function(d) {return d["Pub_final"]; });
+		var genDim = ndx.dimension(function(d) {return d["Genre"]; });
 		var ratingDim = ndx.dimension(function(d) {return d["Rating"]; });
 
 		var salesGroup = yearDim.group().reduceSum(function(d) { return d.Global_Sales});
-		var pubGroup = pubDim.group();
+		var genGroup = genDim.group();
 		var ratingGroup = ratingDim.group();
 		var marketGroup = pubDim.group().reduceSum(function(d) { return d.Global_Sales});
 
@@ -140,8 +139,8 @@
 			.transitionDuration(1500);
 
 		var gc = gamechart
-			.dimension(pubDim)
-			.group(pubGroup)
+			.dimension(genDim)
+			.group(genGroup)
 			.elasticX(true)
 			.width(800)
 			.height(200)
