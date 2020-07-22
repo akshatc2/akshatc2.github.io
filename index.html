@@ -19,16 +19,27 @@
 			  margin: 0;
 			  padding: 10;
 			  overflow: hidden;
-			  background-color: #201d1c;
+			  background-color: #333;
 			}
 
 			li {
 			  float: left;
+			  border-right:1px solid #bbb;
 			}
 
 			li a {
 			  display: block;
-			  padding: 10px;  
+			  color: white;
+			  text-align: center;
+			  padding: 14px 16px;
+			  text-decoration: none;
+			}
+			li a:hover:not(.active) {
+			  background-color: #111;
+			}
+
+			.active {
+			  background-color: #4CAF50;
 			}
 		</style>
 </head>
@@ -37,9 +48,9 @@
     	<div class="container">
     		<ul>
                 <a class="navbar-brand" href="#"><img src="header.png" alt="header" width="659" height="69"></a></br></br></br>
-				<li><b><a style="margin-right: 50px;color:green;font-size:16px"  href="https://akshatc2.github.io/index.html">Publisher View</a></b></li>
-				<li><a style="margin-right: 50px;color:grey;font-size:14px"  href="https://sritesh81.github.io/sarangd3prj/page2Index.html">Genre View</a></li>
-				<li><a style="margin-right: 50px;color:grey;font-size:14px"  href="https://sritesh81.github.io/sarangd3prj/page3Index.html">Platform View</a></li>
+				<li><b><a   href="https://akshatc2.github.io/index.html">Publisher View</a></b></li>
+				<li><a href="https://sritesh81.github.io/sarangd3prj/page2Index.html">Genre View</a></li>
+				<li><a  href="https://sritesh81.github.io/sarangd3prj/page3Index.html">Platform View</a></li>
 			</ul>
         </div>
 	</nav>
