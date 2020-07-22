@@ -16,9 +16,17 @@
 		</style>
 </head>
 <body>
-
-<img src="header.png" alt="header" width="659" height="69">
-<h2> akshatc2's Video Games - Publisher view</h2>
+	<nav class="navbar navbar-default">
+    	<div class="container">
+                <a class="navbar-brand" href="#"><img src="header.png" alt="header" width="659" height="69"></a></br></br></br>
+				<a style="margin-right: 50px;color:green;font-size:16px"  href="https://akshatc2.github.io/index.html">Publisher View</a>
+				<a style="margin-right: 50px;color:grey;font-size:14px"  href="https://sritesh81.github.io/sarangd3prj/page2Index.html">Genre View</a>
+				<a style="margin-right: 50px;color:grey;font-size:14px"  href="https://sritesh81.github.io/sarangd3prj/page3Index.html">Platform View</a>
+        </div>
+	</nav>
+<br>
+<br>
+<!--<h2> akshatc2's Video Games - Publisher view</h2>-->
 
 <div id="totalgames" class="noBox">
 	<h3>Total games per Publisher</h3>
@@ -78,7 +86,7 @@
 
 		saleschart
 			.width(1200)
-			.height(500)
+			.height(400)
 			.dimension(yearDim)
 			.group(salesGroup)
 			.x(d3.time.scale().domain([mindate,maxdate]))
