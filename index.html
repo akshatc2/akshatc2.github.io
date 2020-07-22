@@ -68,7 +68,7 @@
 
 <div id="sales" class="myDiv">
 	<h3>Total publisher sales over the years</h3>
-	<p><i>(Click and drag to filter by year)</i></p>
+	<p><i>(Click and drag to filter by year range)</i></p>
 </div>
 
 <div id="marketshare" class="noBox">
@@ -100,6 +100,7 @@
 		var ndx = crossfilter(data);
 		var all = ndx.groupAll();
 		var sumTotal = all.reduceSum(function(d) { return d.Global_Sales; }).value();
+		console.log(sumTotal);
 
 		var yearDim = ndx.dimension(function(d) {return d["Year_of_Release"]; });
 		var salesDim = ndx.dimension(function(d) {return d["Global_Sales"]; });
@@ -133,7 +134,8 @@
 			.title(function(d){ return d.key + ': $' + Math.round(d.value,0) + 'M'; })
 			.legend(dc.legend().x(500).y(5).itemHeight(15).gap(5))
 			.label(function (d) {
-				return d.key + ': $' + Math.round(d.value/sumTotal,0) + '%';
+				return d.key + ': ' + Math.round(d.value/sumTotal,0) + '%';
+				console.log(d.value);
 			})
 			.transitionDuration(1500);
 
