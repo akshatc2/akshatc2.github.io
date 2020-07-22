@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>akshatc2 vizualization</title>
+
+	<link rel="stylesheet" type="text/css" href="dc.css">
+	<style>
+		.myDiv {
+		  border: 2px outset lightblue;
+		  text-align: center;
+		}
+
+		.noBox {
+		  text-align: center;
+		}
+
+		ul {
+			  list-style-type: none;
+			  margin: 0;
+			  padding: 0;
+			  overflow: hidden;
+			  background-color: #333;
+			}
+
+			li {
+			  float: left;
+			  border-right:1px solid #bbb;
+			}
+
+			li a {
+			  display: block;
+			  color: white;
+			  text-align: center;
+			  padding: 14px 16px;
+			  text-decoration: none;
+			}
+			li a:hover:not(.active) {
+			  background-color: #111;
+			}
+
+			.active {
+			  background-color: #5aaffe;
+			}
+		</style>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+    	<div class="container">
+    		<ul>
+                <li><a style="padding: 0px" class="navbar-brand" href="#"><img src="header.png" alt="header" width="659" height="59"></a></li>
+				<li><a href="https://akshatc2.github.io/index.html">Publisher View</a></li>
+				<li><a href="https://akshatc2.github.io/genre.html">Genre View</a></li>
+				<li><a class="active" href="https://akshatc2.github.io/platform.html">Platform View</a></li>
+			</ul>
+        </div>
+	</nav>
+<br>
+<br>
+
+<div id="totalgames" class="noBox">
+	<h3>Total games per Platform</h3>
+</div>
+
+<div id="totalratings" class="noBox">
+	<h3>Rating distribution of games</h3>
+</div>
+
+<div id="sales" class="myDiv">
+	<h3>Total platform revenue over the years</h3>
+	<p><i>(Click and drag to filter by year range)</i></p>
+</div>
+
+<div id="marketshare" class="noBox">
+	<h3> Platform Market share </h3>
+</div>
+
+
+<script src="crossfilter.js"></script>
+<script src="d3.js"></script>
+<script src="dc.js"></script>
+
+<script>
+	
+	
+	var gamechart = dc.rowChart('#totalgames');
+	var ratingchart = dc.rowChart('#totalratings');
+	var saleschart = dc.lineChart('#sales');
+	var piechart = dc.pieChart('#marketshare');
+
+	d3.csv("clean_Video_Games_Sales_till_2016.csv", function (err,data) {
+		if (err) throw err;
+
+		data.forEach(function(d){
+			var tempDate = new Date(d.Year_of_Release);
+			d.Year_of_Release = tempDate;
+		})
+
+
+		var ndx = crossfilter(data);
+		var all = ndx.groupAll();
+		var sumTotal = all.reduceSum(function(d) { return d.Global_Sales; }).value();
+
+		var yearDim = ndx.dimension(function(d) {return d["Year_of_Release"]; });
+		var salesDim = ndx.dimension(function(d) {return d["Global_Sales"]; });
+		var platDim = ndx.dimension(function(d) {return d["Plat"]; });
+		var ratingDim = ndx.dimension(function(d) {return d["Rating"]; });
+
+		var salesGroup = yearDim.group().reduceSum(function(d) { return d.Global_Sales});
+		var platGroup = platDim.group();
+		var ratingGroup = ratingDim.group();
+		var marketGroup = platDim.group().reduceSum(function(d) { return d.Global_Sales});
+
+		var mindate = new Date("1990");
+		var maxdate = new Date("2016");
+
+		saleschart
+			.width(1200)
+			.height(400)
+			.dimension(yearDim)
+			.group(salesGroup)
+			.x(d3.time.scale().domain([mindate,maxdate]))
+			.yAxisLabel("Sales in million")
+			.renderDataPoints(true)
+			.transitionDuration(1500)
+			.renderArea(true);
+
+		piechart
+			.width(400)
+			.height(300)
+			.innerRadius(50)
+			.dimension(platDim)
+			.group(marketGroup)
+			.title(function(d){ return d.key + ': $' + Math.round(d.value,0) + 'M'; })
+			.legend(dc.legend().x(500).y(5).itemHeight(15).gap(5))
+			.label(function (d) {
+				return d.key + ': ' + Math.round((d.value/sumTotal)*100,0) + '%';
+			})
+			.transitionDuration(1500);
+
+		var gc = gamechart
+			.dimension(platDim)
+			.group(platGroup)
+			.elasticX(true)
+			.width(800)
+			.height(200)
+			.transitionDuration(1500)
+			.xAxis().ticks(10);
+
+		ratingchart
+			.dimension(ratingDim)
+			.group(ratingGroup)
+			.elasticX(true)
+			.transitionDuration(1500)
+			.width(800)
+			.height(200)
+			.xAxis().ticks(10);
+
+		dc.renderAll();
+
+		/*function AddXAxis(chartToUpdate, displayText)
+		{
+    		chartToUpdate.svg()
+                .append("text")
+                .attr("class", "x-axis-label")
+                .attr("text-anchor", "middle")
+                .attr("x", chartToUpdate.width()/2)
+                .attr("y", chartToUpdate.height()-3.5)
+                .text(displayText);
+		}
+		AddXAxis(gc, "This is the x-axis!");*/
+	});
+
+</script>
+</body>
+</html>
