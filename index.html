@@ -134,7 +134,7 @@
 			.title(function(d){ return d.key + ': $' + Math.round(d.value,0) + 'M'; })
 			.legend(dc.legend().x(500).y(5).itemHeight(15).gap(5))
 			.label(function (d) {
-				return d.key + ': ' + Math.round(d.value/sumTotal,0) + '%';
+				return d.key + ': ' + Math.round(d.value,0) + '%';
 				console.log(d.value);
 			})
 			.transitionDuration(1500);
